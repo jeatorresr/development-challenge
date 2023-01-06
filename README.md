@@ -18,11 +18,13 @@ Con la base construida, se procede a desarrollar el desafio.
 *Nota*: Utilizar el servicio de Postman para realizar las diferentes pruebas de funcionamiento.  La respuesta de cada endpoint se verá en la terminal donde ejecutó el contenedor.
 
 1. Descargar la imagen de docker que contiene el proyecto
+```
 *docker pull jeatorresr/development-challenge:0.0.1*
-
+```
 2. Ejecutar la imagen exponiendo el puerto del contenedor a un puerto en su máquina.
+```
 *docker run -p 3000:3000 jeatorresr/development-challenge:0.0.1* 
-
+```
 3. En la aplicación Postman probar cada uno de los endpoints solicitados así:
 - /user
     Enviar una peticion **GET** a http://localhost:3000/user.
