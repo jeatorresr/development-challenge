@@ -24,15 +24,15 @@ Con la base construida, se procede a desarrollar el desafio.
 *docker run -p 3000:3000 jeatorresr/development-challenge:0.0.1* 
 
 3. En la aplicación Postman probar cada uno de los endpoints solicitados así:
-a. /user
+- /user
     Enviar una peticion **GET** a http://localhost:3000/user.
-b. /suma
+- /suma
     Enviar una petición **POST** a http://localhost:3000/suma utilizando la siguiente estructura:
     {
       "num1":"5",
       "num2":"2"
     }
-c. /bitcoin
+- /bitcoin
     Enviar una petición **POST** a http://localhost:3000/suma utilizando la siguiente estructura:
     {
       "moneda":"EUR"
