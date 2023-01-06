@@ -18,6 +18,7 @@ app.get('/', (req, res) => {
 //Con res.status puedo asignar la respuesta que quiero entregar
 app.get('/user', (req, res) => {
     res.status(200).send('Hello Users from Express')
+    console.log('Hello Users from Express')
 })
 
 app.listen(port, () => {
@@ -36,6 +37,7 @@ var formulario = '<form method="post" action="/suma">'
 
 //Necesito un metodo get que muestre el formulario cuando el usuario haga el request a la pagina
 app.get('/suma', function (req, res) {
+    console.log('Suma: ingrese los numeros')
     res.send('<html>Ingrese los numeros<body>'
             + formulario
             + '</html></body>'
@@ -49,6 +51,7 @@ app.post('/suma', function (req, res) {
     var resultado = '';
     if (num1 != '' && num2 != '')
         resultado = parseInt(num1)+parseInt(num2);
+        console.log(resultado)
     res.send('<html>Ingrese los numeros<body>'
             + formulario
             + '<p>' + resultado + '</p>'
@@ -63,22 +66,12 @@ var formulario2 = '<form method="post" action="/bitcoin">'
     + '<input type="submit" value="Enviar"/>'
     + '</form>';
 
-// function test(){
-//     req(url, (response, body)=>{
-//     jsonFile = JSON.stringify(body);
-//     console.log(jsonFile);
-//     return jsonFile
-//     });
-// }
-
 app.get('/bitcoin', function (req, res) {
+    console.log('Bitcoin: Ingrese una moneda EUR, GBP o USD')
     res.send('<html>Ingrese la moneda (EUR, GBP, USD)<body>'
             + formulario2
             + '</html></body>'
     );
-    // const test = fetch('https://api.coindesk.com/v1/bpi/currentprice.json')
-    // .then((response)=>response.json())
-    // .then((jsonFile)=>console.log(jsonFile))
 });
 
 app.post('/bitcoin', function (req, res) {
