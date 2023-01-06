@@ -28,13 +28,17 @@ Con la base construida, se procede a desarrollar el desafio.
     Enviar una peticion **GET** a http://localhost:3000/user.
 - /suma
     Enviar una petición **POST** a http://localhost:3000/suma utilizando la siguiente estructura:
+    ```
     {
       "num1":"5",
       "num2":"2"
     }
+    ```
 - /bitcoin
     Enviar una petición **POST** a http://localhost:3000/suma utilizando la siguiente estructura:
+    ```
     {
       "moneda":"EUR"
     }
+    ```
     Tenga en cuenta que los valores permitidos son EUR, GBP y USD.
