@@ -1,14 +1,18 @@
 const express = require('express')
 const app = express()
 const bodyparser = require('body-parser')
-const port = 3000
-
+const { json, request, response } = require('express')
+const port = 3000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 app.use(bodyparser.json())
+var jsonFile;
+const https = require('https');
+const req = require('request')
 
-app.use(bodyparser.urlencoded({extended:true}))
+// Request URL
+var url = 'https://api.coindesk.com/v1/bpi/currentprice.json';
 
 app.get('/', (req, res) => {
-    res.status(200).send('Hello World!')
+    res.status(200).send('Hello :)')
 })
 
 //Con res.status puedo asignar la respuesta que quiero entregar
@@ -20,6 +24,7 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
+//Segundo punto
 //Crear un formulario para poder ingresar los numeros a sumar
 var formulario = '<form method="post" action="/suma">'
     + '<label for="num1">Num1</label>'
@@ -29,8 +34,7 @@ var formulario = '<form method="post" action="/suma">'
     + '<input type="submit" value="Enviar"/>'
     + '</form>';
 
-//Necesito un metodo get que muestre el formulario cuando el usuario haga el
-//request a la pagina
+//Necesito un metodo get que muestre el formulario cuando el usuario haga el request a la pagina
 app.get('/suma', function (req, res) {
     res.send('<html>Ingrese los numeros<body>'
             + formulario
@@ -51,3 +55,77 @@ app.post('/suma', function (req, res) {
             + '</html></body>'
     );
 });
+
+//Tercer punto
+var formulario2 = '<form method="post" action="/bitcoin">'
+    + '<label for="moneda">Moneda</label>'
+    + '<input type="text" name="moneda" id="moneda">' 
+    + '<input type="submit" value="Enviar"/>'
+    + '</form>';
+
+// function test(){
+//     req(url, (response, body)=>{
+//     jsonFile = JSON.stringify(body);
+//     console.log(jsonFile);
+//     return jsonFile
+//     });
+// }
+
+app.get('/bitcoin', function (req, res) {
+    res.send('<html>Ingrese la moneda (EUR, GBP, USD)<body>'
+            + formulario2
+            + '</html></body>'
+    );
+    // const test = fetch('https://api.coindesk.com/v1/bpi/currentprice.json')
+    // .then((response)=>response.json())
+    // .then((jsonFile)=>console.log(jsonFile))
+});
+
+app.post('/bitcoin', function (req, res) {
+    var moneda = req.body.moneda || '';
+    var bitcoin = '';
+    if (moneda != ''){
+        if(moneda == 'EUR'){
+            const rate = fetch('https://api.coindesk.com/v1/bpi/currentprice.json')
+            .then((response)=>response.json())
+            .then((jsonFile)=>console.log(jsonFile.bpi.EUR.rate))
+            const description = fetch('https://api.coindesk.com/v1/bpi/currentprice.json')
+            .then((response)=>response.json())
+            .then((jsonFile)=>console.log(jsonFile.bpi.EUR.description))
+            res.send('<html>Ingrese la moneda (EUR, GBP, USD<body>'
+            + formulario2
+            + '<p>' + description + '</p>'
+            + '</html></body>'
+            );
+        } else if(moneda == 'GBP'){
+            const rate = fetch('https://api.coindesk.com/v1/bpi/currentprice.json')
+            .then((response)=>response.json())
+            .then((jsonFile)=>console.log(jsonFile.bpi.GBP.rate))
+            const description = fetch('https://api.coindesk.com/v1/bpi/currentprice.json')
+            .then((response)=>response.json())
+            .then((jsonFile)=>console.log(jsonFile.bpi.GBP.description))
+            res.send('<html>Ingrese la moneda (EUR, GBP, USD<body>'
+            + formulario2
+            + '<p>' + description + '</p>'
+            + '</html></body>'
+            );
+        } else if(moneda == 'USD'){
+            const rate = fetch('https://api.coindesk.com/v1/bpi/currentprice.json')
+            .then((response)=>response.json())
+            .then((jsonFile)=>console.log(jsonFile.bpi.USD.rate))
+            const description = fetch('https://api.coindesk.com/v1/bpi/currentprice.json')
+            .then((response)=>response.json())
+            .then((jsonFile)=>console.log(jsonFile.bpi.USD.description))
+            res.send('<html>Ingrese la moneda (EUR, GBP, USD<body>'
+            + formulario2
+            + '<p>' + description + '</p>'
+            + '</html></body>'
+            );
+        } else {
+            console.log('Ingrese una moneda valida')
+        }
+    }
+    
+
+});
+
