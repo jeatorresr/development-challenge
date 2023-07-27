@@ -27,3 +27,4 @@ stages:
         dockerfile: 'myapp/Dockerfile'
         tags: |
           $(tag)
+
